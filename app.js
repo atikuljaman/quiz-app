@@ -52,7 +52,7 @@ const questionObj = [
         b: 'to loop through an object',
         c: 'To show an output',
         d: 'All the above',
-        ans: ''
+        ans: 'ans1'
     },
     {
         que: 'Full form og BOM in JavaScript is ----',
@@ -60,7 +60,7 @@ const questionObj = [
         b: 'Browser Objective Model',
         c: 'Beast Object Modules',
         d: 'Browser Object Model',
-        ans: ''
+        ans: 'ans4'
     },
     {
         que: 'Which dev tool tab of the browser will show you the cookies stored?',
@@ -68,7 +68,7 @@ const questionObj = [
         b: 'Network',
         c: 'Performance',
         d: 'Application',
-        ans: ''
+        ans: 'ans4'
     },
     {
         que: 'If you want to visit "https://www.google.com/" from your site on a button click, which one should you use?',
@@ -76,7 +76,7 @@ const questionObj = [
         b: 'location.move;',
         c: 'location.change;',
         d: 'location.reload;',
-        ans: ''
+        ans: 'ans1'
     },
     {
         que: 'Which storage information will not remain after you close the browser?',
@@ -84,7 +84,7 @@ const questionObj = [
         b: 'local storage',
         c: 'session storage',
         d: 'None of the above',
-        ans: ''
+        ans: 'ans3'
     },
     {
         que: `How will you use the following button to navigate backward exactly one entry in the session history while clicked? document.getElementById('go-back').addEventListener('click', () => {
@@ -96,7 +96,7 @@ const questionObj = [
         b: 'back()',
         c: 'backward(-1)',
         d: 'forward()',
-        ans: ''
+        ans: 'ans2'
     },
     {
         que: 'Which method will you use to store items in local storage?',
@@ -104,7 +104,7 @@ const questionObj = [
         b: 'localStorage.getItem()',
         c: 'localStorage.setItem()',
         d: 'localStorage.saveItem()',
-        ans: ''
+        ans: 'ans3'
     },
     {
         que: 'Which one is true?',
@@ -112,7 +112,7 @@ const questionObj = [
         b: 'cookies are sent to the server',
         c: 'Only Facebook is using cookies',
         d: 'Browser cookies are edible',
-        ans: ''
+        ans: 'ans2'
     },
     {
         que: 'Which one will return you all the cookies in a string?',
@@ -120,11 +120,11 @@ const questionObj = [
         b: 'window.cookieStorage',
         c: 'document.cookie',
         d: 'document.cookies',
-        ans: ''
+        ans: 'ans3'
     }
 ];
 
-const question = document.getElementById('questions');
+const question = document.getElementById('question');
 const option1 = document.getElementById('option1');
 const option2 = document.getElementById('option2');
 const option3 = document.getElementById('option3');
@@ -132,6 +132,7 @@ const option4 = document.getElementById('option4');
 const answers = document.querySelectorAll('.answer');
 const showScore = document.getElementById('score');
 const allData = document.getElementById('all-data');
+
 
 let questionCount = 0;
 let score = 0;
@@ -159,33 +160,32 @@ const getAns = () => {
     return answer;
 }
 
-const deSelect = () => {
+ const deSelect = () => {
     answers.forEach(currAns => currAns.checked = false)
 }
 
 const submitQuiz = () => {
     const checkAns = getAns();
-    console.log(checkAns);
     
     if (checkAns === questionObj[questionCount].ans) {
         score++;
     };
+
     questionCount++;
     deSelect();
+
     if (questionCount < questionObj.length) {
         loadQuestion();
     }
     else {
         showScore.innerHTML = `
-        <div class="pe-5">
-        <img class="img-fluid ps-5 w-100" src="images/pic1.svg" alt="">
-        <br>
-    </div>
+            <div class="pe-5">
+                <img class="img-fluid ps-5 w-100" src="images/pic1.svg" alt="">
+                <br>
+            </div>
 
-    <h4 class="text-center my-3">you scored ${score}/${questionCount} &#9996;</h4>
-    <button onclick="location.reload()" class="btn">Play again</button>
-        `
-
+            <h4 class="text-center my-3">you scored ${score}/${questionObj.length} &#9996;</h4>
+            <button onclick="location.reload()" class="btn">Play again</button>`;
         allData.innerHTML = '';
-    }
+    };
 };
